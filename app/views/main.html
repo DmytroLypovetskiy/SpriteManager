@@ -68,7 +68,7 @@
                             <button ng-click="removeAnimationFrame(animation, frame)" class="remove-button"><i class="glyphicon glyphicon-remove"></i></button>
                             <span>Frame {{ index + 1}}</span>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" ng-if="frame === editorOptions.currentFrame">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Width:</label>
                                 <div class="col-sm-4">

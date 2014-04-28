@@ -53,6 +53,7 @@ angular.module('spriteApp')
         animation.frames.forEach(function (frame) {
           frame.remove();
         });
+        $scope.editorOptions.currentAnimation = $scope.animationStructure.animations[0];
       }
     };
 
