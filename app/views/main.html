@@ -37,17 +37,21 @@
                 <button ng-click="removeAnimation(animation)" class="remove-button"><i class="glyphicon glyphicon-remove"></i></button>
                 <input type="text" class="form-control" ng-model="animation.name" style="width: 200px">
             </div>
-            <div class="panel-body" ng-show="animation === editorOptions.currentAnimation">
-                <div class="form-group">
+            <div class="panel-body" ng-show="animation === editorOptions.currentAnimation" >
+                <animation-previewer image="animationStructure.imageSource" animation="animation"></animation-previewer>
+                <div class="form-group" >
                     <label class="col-sm-2 control-label">Width:</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-10">
                         <input type="number" class="form-control" ng-model="animation.width">
                     </div>
+                </div>
+                <div class="form-group" >
                     <label class="col-sm-2 control-label">Height:</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-10">
                         <input type="number" class="form-control" ng-model="animation.height">
                     </div>
                 </div>
+
                 <div class="panel-body">
                     <div class="panel"
                          ng-repeat="(index, frame) in animation.frames"

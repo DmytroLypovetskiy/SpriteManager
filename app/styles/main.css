@@ -110,3 +110,18 @@ body {
     padding: 0;
     height: 100%;
 }
+/* animation-previwer */
+.animation-previwer {
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #000;
+    float: right;
+}
+.animation-previwer div{
+    position: relative;
+    overflow: hidden;
+}
+.animation-previwer img {
+    position: absolute;
+    display: none;
+}
