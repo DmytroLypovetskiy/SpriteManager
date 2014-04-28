@@ -37,7 +37,8 @@ angular.module('spriteApp')
         name: 'Animation set ' + nextAnimNum,
         width: 64,
         height: 64,
-        frames: []
+        frames: [],
+        speed: 0.5
       });
       $scope.editorOptions.currentAnimation = _.last($scope.animationStructure.animations);
     };

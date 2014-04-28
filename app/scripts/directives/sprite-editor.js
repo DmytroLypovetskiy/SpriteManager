@@ -150,7 +150,7 @@ angular.module('spriteApp')
 
           // Check whether there is some object under cursor
           if (canvas.getObjects().some(function(o) {
-            return o.containsPoint(point);
+            return o.containsPoint(point) && (o.animationSet === scope.editorOptions.currentAnimation);
           })) {
             return;
           }
@@ -273,7 +273,7 @@ angular.module('spriteApp')
           if (!activeObject || event.target.tagName.toLowerCase() === 'input') {
             return;
           }
-          console.log(event);
+//          console.log(event);
           if (!event.shiftKey) {
             switch(event.keyIdentifier) {
               case 'Left':

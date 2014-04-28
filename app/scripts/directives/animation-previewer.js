@@ -11,7 +11,6 @@ angular.module('spriteApp')
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
         var currentFrame = 0,
-            animSpeed = 500,
             interval = null;
 
         var doAnimation = function () {
@@ -22,21 +21,19 @@ angular.module('spriteApp')
           interval = window.setInterval(function () {
             var frame = scope.animation.frames[currentFrame];
             if (!frame) {
-              element.find('img').css({ display: 'none' });
+              window.clearInterval(interval);
               return;
             }
-            console.log(frame);
             element.find('img').css({
               left: -frame.getLeft(),
-              top: -frame.getTop(),
-              display: 'block'
+              top: -frame.getTop()
             });
-            element.find('div').css({
+            element.find('.animation-previwer div').css({
               width: frame.getWidth(),
               height: frame.getHeight()
             });
             currentFrame = scope.animation.frames.length - 1 > currentFrame ? currentFrame + 1 : 0;
-          }, animSpeed);
+          }, scope.animation.speed * 1000);
         };
 
         $rootScope.$on('controls:changeProperty', function () {
@@ -44,6 +41,7 @@ angular.module('spriteApp')
         });
 
         scope.$watchCollection('animation.frames', doAnimation);
+        scope.$watchCollection('animation.speed', doAnimation);
       }
     };
   });
