@@ -66,21 +66,43 @@ body {
 }
 /* control-panel */
 .control-panel {
-    width: 300px;
+    width: 350px;
     position: fixed;
-    right: -10px;
+    right: -21px;
     top: 52px;
     max-height: calc(100% - 100px);
-    overflow: auto;
+    overflow: scroll;
     transition: 0.5s;
 }
 .control-panel .animation-set {
-    padding: 5px !important;
+    padding: 5px 10px 5px 5px !important;
+}
+
+.control-panel .animation-set .form-group {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.control-panel .animation-set .remove-button {
+    float: right;
+}
+.control-panel .animation-set .panel {
+    margin-bottom: 5px;
+}
+.control-panel .animation-set .panel .panel-body {
+    padding: 5px;
+}
+.control-panel .animation-set input.form-control {
+    padding: 3px 6px;
+    height: auto;
+}
+.control-panel .animation-set label {
+    font-weight: normal;
+    padding: 0;
 }
 .control-panel.small {
-    right: -250px;
+    right: -300px;
 }
-.control-panel.small .animation-set{
+.control-panel.small .animation-set {
     display: none;
 }
 #main-wrapper {

@@ -5,6 +5,9 @@
     <div class="container">
         <div class="container-fluid header-controls">
             <div class="pull-right">
+                <label><input type="number" ng-model="editorOptions.greedSize.width" style="width: 50px;" min="2"/> Greed width</label>
+                <label><input type="number" ng-model="editorOptions.greedSize.height" style="width: 50px;" min="2"/> Greed height</label>
+                |
                 <label><input type="checkbox" ng-model="editorOptions.snapToGreed"/> Snap to greed</label>
                 |
                 <div class="btn-group btn-group-sm">
@@ -16,29 +19,65 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span>  </button>
                 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-open"></span>  </button>
+                <button type="button" class="btn btn-default" ng-click="copyToClipboard()"><span class="glyphicon glyphicon-export" title="Copy to clipboard"></span>  </button>
             </div>
 
         </div><!-- /.container-fluid -->
     </div>
 </nav>
-<div class="panel panel-primary control-panel" ng-class="{small: !editorOptions.displayAnimationPanel}">
+<div class="panel panel-primary control-panel" ng-class="{small: !editorOptions.displayAnimationPanel}" ng-show="!!animationStructure.imageSource">
     <div class="panel-heading"  ng-click="editorOptions.displayAnimationPanel = !editorOptions.displayAnimationPanel">
         <em class="glyphicon glyphicon-tasks" style="font-size: 20px;"></em><span style="margin-left: 15px">Animations</span>
     </div>
     <div class="panel-body animation-set">
-        <div class="panel panel-default" ng-repeat="animation in animationStructure.animations">
-            <div class="panel-heading"><input type="text" class="form-control" ng-model="animation.name"></div>
-            <div class="panel-body">
+        <div class="panel"
+             ng-class="{'panel-success': animation === editorOptions.currentAnimation, 'panel-info': animation !== editorOptions.currentAnimation}"
+             ng-repeat="animation in animationStructure.animations" >
+            <div class="panel-heading" ng-click="setCurrentAnimation(animation)">
+                <button ng-click="removeAnimation(animation)" class="remove-button"><i class="glyphicon glyphicon-remove"></i></button>
+                <input type="text" class="form-control" ng-model="animation.name" style="width: 200px">
+            </div>
+            <div class="panel-body" ng-show="animation === editorOptions.currentAnimation">
                 <div class="form-group">
-                    <label class="col-sm-6 control-label">Wdith:</label>
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" ng-model="animation.width">
+                    <label class="col-sm-2 control-label">Width:</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" ng-model="animation.width">
+                    </div>
+                    <label class="col-sm-2 control-label">Height:</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" ng-model="animation.height">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-6 control-label">Height:</label>
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" ng-model="animation.height">
+                <div class="panel-body">
+                    <div class="panel"
+                         ng-repeat="(index, frame) in animation.frames"
+                         ng-class="{'panel-warning': frame === editorOptions.currentFrame, 'panel-default': frame !== editorOptions.currentFrame}">
+                        <div class="panel-heading" ng-click="editorOptions.currentFrame = frame">
+                            <button ng-click="removeAnimationFrame(animation, frame)" class="remove-button"><i class="glyphicon glyphicon-remove"></i></button>
+                            <span>Frame {{ index + 1}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Width:</label>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control" ng-model="frame.width" ng-change="change()">
+                                </div>
+                                <label class="col-sm-2 control-label">Height:</label>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control" ng-model="frame.height" ng-change="change()">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Let:</label>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control" ng-model="frame.left" ng-change="change()">
+                                </div>
+                                <label class="col-sm-2 control-label">Top:</label>
+                                <div class="col-sm-4">
+                                    <input type="number" class="form-control" ng-model="frame.top" ng-change="change()">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
