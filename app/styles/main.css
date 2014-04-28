@@ -124,3 +124,12 @@ body {
 .animation-previwer img {
     position: absolute;
 }
+.animation-previwer .current-frame {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    color: #000;
+    text-shadow: 0 0 1px #000;
+    font-size: 9px;
+    z-index: 20;
+}

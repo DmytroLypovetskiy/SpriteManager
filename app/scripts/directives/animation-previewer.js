@@ -3,7 +3,7 @@
 angular.module('spriteApp')
   .directive('animationPreviewer', function ($rootScope) {
     return {
-      template: '<div class="animation-previwer" style="width:{{ animation.width }}px; height:{{ animation.height }}px;"><div><img src="{{ image }}" alt="" /></div></div>',
+      template: '<div class="animation-previwer" style="width:{{ animation.width }}px; height:{{ animation.height }}px;"><div><img src="{{ image }}" alt="" /></div><span class="current-frame"></span></div>',
       scope: {
         image: '=',
         animation: '='
@@ -16,6 +16,7 @@ angular.module('spriteApp')
         var doAnimation = function () {
           if (interval) {
             window.clearInterval(interval);
+            currentFrame = 0;
           }
 
           interval = window.setInterval(function () {
@@ -32,6 +33,7 @@ angular.module('spriteApp')
               width: frame.getWidth(),
               height: frame.getHeight()
             });
+            element.find('.current-frame').text(currentFrame);
             currentFrame = scope.animation.frames.length - 1 > currentFrame ? currentFrame + 1 : 0;
           }, scope.animation.speed * 1000);
         };
