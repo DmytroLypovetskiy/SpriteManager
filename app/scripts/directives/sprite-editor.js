@@ -134,7 +134,11 @@ angular.module('spriteApp')
             hasRotatingPoint: false,
             transparentCorners: false,
             cornerSize: 6,
-            animationSet: scope.editorOptions.currentAnimation
+            animationSet: scope.editorOptions.currentAnimation,
+            offset: {
+              left: 0,
+              top: 0
+            }
           });
         };
         /**

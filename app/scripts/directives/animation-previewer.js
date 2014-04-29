@@ -3,7 +3,7 @@
 angular.module('spriteApp')
   .directive('animationPreviewer', function ($rootScope) {
     return {
-      template: '<div class="animation-previwer" style="width:{{ animation.width }}px; height:{{ animation.height }}px;"><div><img src="{{ image }}" alt="" /></div><span class="current-frame"></span></div>',
+      template: '<div class="animation-previwer">\n    <div class="frame">\n        <div class="crop">\n            <img src="{{ image }}" alt="" />\n        </div>\n        <div class="frame-border"></div>\n    </div>\n    <span class="current-frame"></span>\n</div>',
       scope: {
         image: '=',
         animation: '='
@@ -29,7 +29,15 @@ angular.module('spriteApp')
               left: -frame.getLeft(),
               top: -frame.getTop()
             });
-            element.find('.animation-previwer div').css({
+            element.find('.frame').css({
+              width: scope.animation.width,
+              height: scope.animation.height,
+              'margin-top' : - scope.animation.height / 2,
+              'margin-left': - scope.animation.width / 2
+            });
+            element.find('.crop').css({
+              left: - frame.offset.left,
+              top: - frame.offset.top,
               width: frame.getWidth(),
               height: frame.getHeight()
             });

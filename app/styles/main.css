@@ -98,6 +98,8 @@ body {
 .control-panel .animation-set label {
     font-weight: normal;
     padding: 0;
+    font-size: 10px;
+    line-height: 28px;
 }
 .control-panel.small {
     right: -300px;
@@ -116,20 +118,41 @@ body {
     position: relative;
     border: 1px solid #000;
     float: right;
+    background-image: url(../images/bg-greed.png);
+    min-width: 180px;
+    min-height: 180px;
 }
-.animation-previwer div{
-    position: relative;
+.animation-previwer .frame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+.animation-previwer .frame .frame-border {
+    width: 100%;
+    height: 100%;
+    left: -1px;
+    top: -1px;
+    border: 1px dashed #c00;
+    position: absolute;
+    z-index: 10;
+}
+.animation-previwer .crop {
+    position: absolute;
     overflow: hidden;
+    left: 0;
+    top: 0;
 }
 .animation-previwer img {
     position: absolute;
+    left: 0;
+    top: 0;
 }
 .animation-previwer .current-frame {
     position: absolute;
     left: 1px;
     top: 1px;
     color: #000;
-    text-shadow: 0 0 1px #000;
-    font-size: 9px;
+    text-shadow: 0 0 0 #000;
+    font-size: 10px;
     z-index: 20;
 }

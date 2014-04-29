@@ -23,7 +23,10 @@ angular.module('spriteApp')
      * It's needed for deep structures which can't be observed in ordinal way,
      * because they have circular links.
      */
-    $scope.change = function () {
+    $scope.change = function (obj) {
+      if (obj) {
+        obj.setCoords();
+      }
       $rootScope.$emit('controls:changeProperty');
     };
 
@@ -35,8 +38,8 @@ angular.module('spriteApp')
       $scope.animationStructure.animations.push({
         id: nextAnimNum,
         name: 'Animation set ' + nextAnimNum,
-        width: 64,
-        height: 64,
+        width: 40,
+        height: 40,
         frames: [],
         speed: 0.5
       });
