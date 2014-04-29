@@ -51,7 +51,7 @@ angular.module('spriteApp')
         });
 
         scope.$watchCollection('animation.frames', doAnimation);
-        scope.$watchCollection('animation.speed', doAnimation);
+        scope.$watch('animation.speed', doAnimation);
       }
     };
   });

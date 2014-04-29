@@ -5,16 +5,18 @@
     <div class="container">
         <div class="container-fluid header-controls">
             <div class="pull-right">
-                <label><input type="number" ng-model="editorOptions.greedSize.width" style="width: 50px;" min="2"/> Greed width</label>
-                <label><input type="number" ng-model="editorOptions.greedSize.height" style="width: 50px;" min="2"/> Greed height</label>
-                |
-                <label><input type="checkbox" ng-model="editorOptions.snapToGreed"/> Snap to greed</label>
-                |
-                <div class="btn-group btn-group-sm">
-                    <label for="canvas-color">Canvas bg:</label>
-                    <input type="color" ng-model="editorOptions.background" id="canvas-color"/>
-                    <span class="glyphicon glyphicon-th-large" style="color: #000;" ng-click="editorOptions.background = 'url(images/bg-greed.png)'"></span>
-                </div>
+                <form class="form-inline">
+                    <label><input type="number" ng-model="editorOptions.greedSize.width" style="width: 50px;" min="2" class="form-control"/> Greed width</label>
+                    <label><input type="number" ng-model="editorOptions.greedSize.height" style="width: 50px;" class="form-control" min="2"/> Greed height</label>
+                    |
+                    <label><input type="checkbox" ng-model="editorOptions.snapToGreed"/> Snap to greed</label>
+                    |
+                    <div class="btn-group btn-group-sm">
+                        <label for="canvas-color">Canvas bg:</label>
+                        <input type="color" ng-model="editorOptions.background" id="canvas-color" class="form-control" style="width: 50px;"/>
+                        <span class="glyphicon glyphicon-th-large" style="color: #000;" ng-click="editorOptions.background = 'url(images/bg-greed.png)'"></span>
+                    </div>
+                </form>
             </div>
             <div class="btn-group">
                 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span>  </button>

@@ -72,6 +72,18 @@ angular.module('spriteApp')
       }
     };
 
+    $scope.dragAnimation = function (animation) {
+        if (confirm('Are you sure you want to delete this animation?')) {
+            _.remove($scope.animationStructure.animations, animation);
+            animation.frames.forEach(function (frame) {
+                frame.remove();
+            });
+            $scope.editorOptions.currentAnimation = $scope.animationStructure.animations[0];
+        }
+    };
+
+
+
     /**
      * Set current animation and sets first framse as current frame
      * @param animation
