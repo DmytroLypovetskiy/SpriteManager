@@ -118,7 +118,7 @@ angular.module('spriteApp')
          * @param height
          * @returns {fabric.Rect}
          */
-        var createRectangle = function (left, top, width, height) {
+        var createRectangle = function (left, top, width, height, offset) {
           return new fabric.Rect({
             left: left,
             top: top,
@@ -135,10 +135,7 @@ angular.module('spriteApp')
             transparentCorners: false,
             cornerSize: 6,
             animationSet: scope.editorOptions.currentAnimation,
-            offset: {
-              left: 0,
-              top: 0
-            }
+            offset: offset
           });
         };
         /**
@@ -208,7 +205,10 @@ angular.module('spriteApp')
           }
 
           // Create rectangle
-          rectangle = createRectangle(position.left, position.top, dimensions.w, dimensions.h);
+          rectangle = createRectangle(position.left, position.top, dimensions.w, dimensions.h, {
+            left: 0,
+            top: 0
+          });
 
           scope.editorOptions.currentAnimation.frames.push(rectangle);
           scope.editorOptions.currentFrame = rectangle;
@@ -297,7 +297,7 @@ angular.module('spriteApp')
                 _.remove(scope.editorOptions.currentAnimation.frames, activeObject);
                 break;
               case 'U+0043': // C - copy and paste at once
-                var newObject = createRectangle(activeObject.getLeft() + activeObject.getWidth(), activeObject.getTop(), activeObject.getWidth(), activeObject.getHeight());
+                var newObject = createRectangle(activeObject.getLeft() + activeObject.getWidth(), activeObject.getTop(), activeObject.getWidth(), activeObject.getHeight(), activeObject.offset);
                 canvas.add(newObject);
                 canvas.setActiveObject(newObject);
                 scope.editorOptions.currentAnimation.frames.push(newObject);

@@ -62,43 +62,50 @@
                   </div>
 
                 </div>
-                <div class="panel-body">
-                    <div class="panel"
-                         ng-repeat="(index, frame) in animation.frames"
-                         ng-class="{'panel-warning': frame === editorOptions.currentFrame, 'panel-default': frame !== editorOptions.currentFrame}">
-                        <div class="panel-heading" ng-click="editorOptions.currentFrame = frame">
-                            <button ng-click="removeAnimationFrame(animation, frame)" class="remove-button"><i class="glyphicon glyphicon-remove"></i></button>
-                            <span>Frame {{ index + 1}}</span>
-                        </div>
-                        <div class="panel-body" ng-if="frame === editorOptions.currentFrame">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Width:</label>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control" ng-model="frame.width" ng-change="change(frame)">
+                <div class="panel-body" ui-tree>
+                    <div ui-tree-nodes="" ng-model="animation.frames">
+                        <div class="panel"
+                             ng-repeat="frame in animation.frames"
+                             ng-class="{'panel-warning': frame === editorOptions.currentFrame, 'panel-default': frame !== editorOptions.currentFrame}"
+                             ui-tree-node>
+                            <div class="panel-heading" ng-click="editorOptions.currentFrame = frame">
+                                <div class="btn-group pull-right">
+                                    <button ng-click="removeAnimationFrame(animation, frame)"><i class="glyphicon glyphicon-remove"></i></button>
+                                    <button ui-tree-handle ><i class="glyphicon glyphicon-sort"></i></button>
                                 </div>
-                                <label class="col-sm-2 control-label">Height:</label>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control" ng-model="frame.height" ng-change="change(frame)">
-                                </div>
+                                <span>Frame {{ animation.frames.indexOf(frame) + 1 }}</span>
+
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Left:</label>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control" ng-model="frame.left" ng-change="change(frame)">
+                            <div class="panel-body frame-set" ng-if="frame === editorOptions.currentFrame">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Width:</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" ng-model="frame.width" ng-change="change(frame)">
+                                    </div>
+                                    <label class="col-sm-2 control-label">Height:</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" ng-model="frame.height" ng-change="change(frame)">
+                                    </div>
                                 </div>
-                                <label class="col-sm-2 control-label">Top:</label>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control" ng-model="frame.top" ng-change="change(frame)">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Left:</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" ng-model="frame.left" ng-change="change(frame)">
+                                    </div>
+                                    <label class="col-sm-2 control-label">Top:</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" ng-model="frame.top" ng-change="change(frame)">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" title="Left Offset">Of. Left:</label>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control" ng-model="frame.offset.left" ng-change="change()">
-                                </div>
-                                <label class="col-sm-2 control-label" title="Top Offset">Of. Top:</label>
-                                <div class="col-sm-4">
-                                    <input type="number" class="form-control" ng-model="frame.offset.top" ng-change="change()">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" title="Left Offset">Of. Left:</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" ng-model="frame.offset.left" ng-change="change()">
+                                    </div>
+                                    <label class="col-sm-2 control-label" title="Top Offset">Of. Top:</label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" ng-model="frame.offset.top" ng-change="change()">
+                                    </div>
                                 </div>
                             </div>
                         </div>
