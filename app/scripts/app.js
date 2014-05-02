@@ -6,9 +6,13 @@ angular
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'ui.tree'
+    'ui.tree',
+    'spriteApp.sockets',
+    'ngAnimate',
+    'toaster',
+    'ui.bootstrap'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, socketsProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -17,4 +21,6 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+    // Adjusting socket.io
+    socketsProvider.setSocketHost('127.0.0.1:9001');
   });

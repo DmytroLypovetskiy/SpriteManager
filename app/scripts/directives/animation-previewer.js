@@ -9,7 +9,7 @@ angular.module('spriteApp')
         animation: '='
       },
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
+      link: function postLink(scope, element) {
         var currentFrame = 0,
             interval = null;
 
@@ -48,6 +48,11 @@ angular.module('spriteApp')
 
         $rootScope.$on('controls:changeProperty', function () {
           doAnimation();
+        });
+
+        $rootScope.$on('controls:stopAllAnimations', function () {
+          window.clearInterval(interval);
+          interval = null;
         });
 
         scope.$watchCollection('animation.frames', doAnimation);

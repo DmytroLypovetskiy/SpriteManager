@@ -1,6 +1,11 @@
+<!-- container for notifications -->
+<toaster-container toaster-options="{'time-out': 5000, 'position-class': 'toast-bottom-right'}"></toaster-container>
+<!-- upload area -->
 <upload-area source="animationStructure.imageSource"  ng-hide="!!animationStructure.imageSource"></upload-area>
+<!-- sprite editor -->
 <sprite-editor ng-if="!!animationStructure.imageSource" editor-options="editorOptions" structure="animationStructure"></sprite-editor>
 
+<!-- top control bar -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="container-fluid header-controls">
@@ -18,15 +23,19 @@
                     </div>
                 </form>
             </div>
+            <label><input class="form-control" type="text" placeholder="File name" ng-model="animationStructure.name"/></label>
             <div class="btn-group">
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span>  </button>
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-open"></span>  </button>
-                <button type="button" class="btn btn-default" ng-click="copyToClipboard()"><span class="glyphicon glyphicon-export" title="Copy to clipboard"></span>  </button>
+                <button type="button" class="btn btn-default" ng-if="animationStructure.imageSource" title="Save" ng-click="saveToServer()"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                <button type="button" class="btn btn-default" title="Load" ng-click="loadFromServer()"><span class="glyphicon glyphicon-floppy-open"></span></button>
+                <button type="button" class="btn btn-default" title="Copy to clipboard" ng-click="copyToClipboard()"><span class="glyphicon glyphicon-export" title="Copy to clipboard"></span>  </button>
             </div>
-
+            <span ng-if="editorOptions.connection" class="small">Connected to the server <span class="glyphicon glyphicon-ok-circle" style="color: #00cc00"></span></span>
+            <span ng-if="!editorOptions.connection" class="small">Disconneceted from the server <span class="glyphicon glyphicon-ban-circle" style="color:#cc0000"></span></span>
         </div><!-- /.container-fluid -->
     </div>
 </nav>
+
+<!-- side control panel -->
 <div class="panel panel-primary control-panel" ng-class="{small: !editorOptions.displayAnimationPanel}" ng-show="!!animationStructure.imageSource">
     <div class="panel-heading"  ng-click="editorOptions.displayAnimationPanel = !editorOptions.displayAnimationPanel">
         <em class="glyphicon glyphicon-tasks" style="font-size: 20px;"></em><span style="margin-left: 15px">Animations</span>
@@ -36,7 +45,7 @@
              ng-class="{'panel-success': animation === editorOptions.currentAnimation, 'panel-info': animation !== editorOptions.currentAnimation}"
              ng-repeat="animation in animationStructure.animations" >
             <div class="panel-heading" ng-click="setCurrentAnimation(animation)">
-                <button ng-click="removeAnimation(animation)" class="remove-button"><i class="glyphicon glyphicon-remove"></i></button>
+                <button ng-click="removeAnimation(animation)" class="pull-right"><i class="glyphicon glyphicon-remove"></i></button>
                 <input type="text" class="form-control" ng-model="animation.name" style="width: 200px">
             </div>
             <div class="panel-body" ng-show="animation === editorOptions.currentAnimation" >

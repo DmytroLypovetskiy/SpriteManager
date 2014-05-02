@@ -281,6 +281,10 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
+        }, {
+          expand: true,
+          dest: '<%= yeoman.dist %>/server/',
+          src: ['<%= yeoman.app %>/server/**']
         }]
       },
       styles: {

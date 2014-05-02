@@ -13,44 +13,6 @@ angular.module('spriteApp')
         var canvas, image, imgInstance, state;
 
         /**
-         * Initialize canvas and image
-         */
-        var init = function () {
-          // Create the image
-          image = new Image();
-          image.src = scope.structure.imageSource;
-
-          // Create the canvas
-          canvas = new fabric.Canvas('main-canvas', {
-            width: image.width,
-            height: image.height
-          });
-
-          // Dirty trick for fix canvas offset when it is placed inside a scroll are
-          fabric.util.addListener(element.find('.sprite-editor')[0], 'scroll', function () {
-            canvas.calcOffset();
-          });
-
-          // Create the fabric image instance
-          imgInstance = new fabric.Image(image, {
-            left: 0,
-            top: 0,
-            selectable: false
-          });
-          canvas.backgroundImage = imgInstance;
-          canvas.renderAll();
-
-          // Init state
-          state = {
-            isMouseDown: false,
-            start: {
-              x: 0,
-              y: 0
-            }
-          };
-        };
-
-        /**
          * Init all appropriate watcher for the current scope
          */
         var initWatchers = function () {
@@ -84,6 +46,7 @@ angular.module('spriteApp')
           $rootScope.$on('controls:changeProperty', function () {
             canvas.renderAll();
           });
+
         };
 
         /**
@@ -138,6 +101,7 @@ angular.module('spriteApp')
             offset: offset
           });
         };
+
         /**
          * Handler of mouse down event. Starts the draw process
          * @param event
@@ -277,7 +241,6 @@ angular.module('spriteApp')
           if (!activeObject || event.target.tagName.toLowerCase() === 'input') {
             return;
           }
-//          console.log(event);
           if (!event.shiftKey) {
             switch(event.keyIdentifier) {
               case 'Left':
@@ -338,6 +301,67 @@ angular.module('spriteApp')
           canvas.on('object:moving', onObjectMoving);
           canvas.on('object:selected', onObjectSelected);
           document.addEventListener("keydown", onKeyDown, false);
+        };
+
+        /**
+         * Gets the tow animation structure and makes it enliven.
+         * In other words creates appropriate fabric.js objects on the canvas.
+         */
+        var enlivenAnimationStructure = function () {
+          canvas.clear();
+          scope.structure.animations.forEach(function (animation) {
+            // Set current animation
+            scope.editorOptions.currentAnimation = animation;
+            animation.frames.forEach(function (frame, index) {
+//              debugger;
+              animation.frames[index] = createRectangle(frame.left, frame.top, frame.width, frame.height, frame.offset );
+              canvas.add(animation.frames[index]);
+            });
+          });
+          canvas.renderAll();
+        };
+
+        /**
+         * Initialize canvas and image
+         */
+        var init = function () {
+          // Create the image
+          image = new Image();
+          image.src = scope.structure.imageSource;
+
+          // Create the canvas
+          canvas = new fabric.Canvas('main-canvas', {
+            width: image.width,
+            height: image.height
+          });
+
+          // Dirty trick for fix canvas offset when it is placed inside a scroll are
+          fabric.util.addListener(element.find('.sprite-editor')[0], 'scroll', function () {
+            canvas.calcOffset();
+          });
+
+          // Create the fabric image instance
+          imgInstance = new fabric.Image(image, {
+            left: 0,
+            top: 0,
+            selectable: false
+          });
+          canvas.backgroundImage = imgInstance;
+          canvas.renderAll();
+
+          // Init state
+          state = {
+            isMouseDown: false,
+            start: {
+              x: 0,
+              y: 0
+            }
+          };
+
+          // In case there some animations are already existed
+          if (scope.structure.animations.length) {
+            enlivenAnimationStructure();
+          }
         };
 
         init();

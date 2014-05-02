@@ -1,0 +1,11 @@
+{
+  "name": "sprite-manager-server",
+  "version": "0.0.1",
+  "dependencies": {
+    "socket.io": "0.9.16",
+    "express": "3.4.7"
+  },
+  "devDependencies": {
+    "lodash-node": "~2.4.1"
+  }
+}
