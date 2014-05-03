@@ -6,9 +6,8 @@ var _ = require('lodash-node');
  * Animations adapter for Impactjs engine
  */
 module.exports = {
-  template: 'ig.module(\'game.animations.<%= name %>\' ).requires( \'impact.image\').defines(function(){' +
-      'Animation<%= nameUppercase %> = <%= JSON.stringify(animations) %>;' +
-      'Animation<%= nameUppercase %>.spriteImage = \'<%= image %>\';' +
+  template: 'ig.module(\'game.animations.<%= name %>\' ).requires( \'plugins.animation-ext\').defines(function(){' +
+      'Animation<%= nameUppercase %> = ig.AnimationSet.bind(ig.AnimationSet, new ig.ImageExt(\'<%= image %>\'), <%= JSON.stringify(animations) %>);' +
     '});',
 
   /**
@@ -42,8 +41,8 @@ module.exports = {
 
     return {
       name: tempResult[1],
-      imageSource: tempResult[5],
-      animations: JSON.parse(tempResult[3])
+      imageSource: tempResult[3],
+      animations: JSON.parse(tempResult[4])
     };
   }
 };

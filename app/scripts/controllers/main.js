@@ -43,7 +43,8 @@ angular.module('spriteApp')
         width: 40,
         height: 40,
         frames: [],
-        speed: 0.5
+        speed: 0.5,
+        stop: false
       });
       $scope.editorOptions.currentAnimation = _.last($scope.animationStructure.animations);
     };
@@ -106,7 +107,7 @@ angular.module('spriteApp')
       };
 
       $scope.animationStructure.animations.forEach(function (animation) {
-        var animModified = _.pick(animation, 'name', 'width', 'height', 'speed');
+        var animModified = _.pick(animation, 'name', 'width', 'height', 'speed', 'stop');
         // Pick only appropriate fields
         animModified.frames = animation.frames.map(function (frame) {
           return _.pick(frame, 'width', 'height', 'left', 'top', 'offset');

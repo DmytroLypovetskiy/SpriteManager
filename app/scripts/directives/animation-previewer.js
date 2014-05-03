@@ -41,8 +41,8 @@ angular.module('spriteApp')
               width: frame.getWidth(),
               height: frame.getHeight()
             });
-            element.find('.current-frame').text(currentFrame);
-            currentFrame = scope.animation.frames.length - 1 > currentFrame ? currentFrame + 1 : 0;
+            element.find('.current-frame').text(currentFrame + 1);
+            currentFrame = scope.animation.frames.length - 1 > currentFrame ? currentFrame + 1 : (scope.animation.stop ? currentFrame : 0);
           }, scope.animation.speed * 1000);
         };
 

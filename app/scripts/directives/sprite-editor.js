@@ -98,7 +98,7 @@ angular.module('spriteApp')
             transparentCorners: false,
             cornerSize: 6,
             animationSet: scope.editorOptions.currentAnimation,
-            offset: offset
+            offset: _.clone(offset)
           });
         };
 
