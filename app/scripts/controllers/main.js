@@ -5,6 +5,7 @@ angular.module('spriteApp')
     $scope.animationStructure = {
       name: 'default',
       imageSource: null,
+      imageUrl: null,
       animations: []
     };
     $scope.editorOptions = {
@@ -103,7 +104,7 @@ angular.module('spriteApp')
         name: $scope.animationStructure.name,
         animations: [],
 
-        image: $scope.animationStructure.imageSource
+        image: $scope.animationStructure.imageUrl || $scope.animationStructure.imageSource
       };
 
       $scope.animationStructure.animations.forEach(function (animation) {
@@ -159,7 +160,7 @@ angular.module('spriteApp')
 
             $scope.getFileExtension = function (name) {
               var ext = name.match(/\.([0-9a-z]+)(?:[\?#]|$)/i);
-              return ext.length ? ext[1] : '';
+              return ext ? ext.length ? ext[1] : '' : '';
             };
 
             $scope.ok = function () {

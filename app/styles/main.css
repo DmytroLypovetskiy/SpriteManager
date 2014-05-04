@@ -50,6 +50,39 @@ body {
     display: none;
 }
 
+/* image selector */
+.image-selector {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+    border: 2px solid #999;
+    display: block;
+    background: #eee;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -web-kit-box-sizing: border-box;
+    cursor: pointer;
+}
+
+.image-selector:after {
+    content: 'click to select an image';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #aaa;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.image-selector:hover {
+    border-color: #000;
+    color: #000;
+}
 /* Sprite editor */
 .sprite-editor {
     width: 100%;
@@ -173,7 +206,7 @@ body {
     padding: 15px;
     list-style: none;
     overflow: auto;
-    height: 200px;
+    height: 350px;
 }
 .file-explorer li {
     margin-botton: -1px;
@@ -190,6 +223,9 @@ body {
 }
 .file-explorer li span.icon-file-js {
     background-image: url(../images/icon-file-js.png);
+}
+.file-explorer li span.icon-file-png {
+    background-image: url(../images/icon-file-png.png);
 }
 .file-explorer li:hover {
     border-color: #b8d6fb;

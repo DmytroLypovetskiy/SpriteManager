@@ -32,6 +32,13 @@ var CServer = function() {
 
       // Sockets business logic
 
+      // On client ask the server to get the list of existed images
+      socket.on(events.FILE.GET_IMAGE_LIST, function (callback) {
+        callback(fileManager.getFileList(config.imagesDirectory).map(function (filename) {
+          return config.imageUrlPrefix + filename;
+        }));
+      });
+
       // On client wants to save some file
       socket.on(events.FILE.SAVE, function (structure) {
         fileManager.save(structure);

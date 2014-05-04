@@ -2,8 +2,13 @@
     <h3 class="modal-title">Open an animation</h3>
 </div>
 <div class="modal-body">
+    <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+        <input type="text" class="form-control" placeholder="Search" ng-model="filter">
+    </div>
+    <br/>
     <ul class="file-explorer">
-        <li ng-repeat="item in items" ng-click="selected.item = item" ng-class="{active: selected.item == item}">
+        <li ng-repeat="item in items|filter:filter" ng-click="selected.item = item" ng-class="{active: selected.item == item}">
             <span  class="icon-file-{{ getFileExtension(item) }}" >{{ item }}</span>
         </li>
     </ul>

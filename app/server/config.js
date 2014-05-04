@@ -1,4 +1,6 @@
 module.exports = {
-  rootDirectory: '/WebServers/home/impact/www/GloryToUkraine/lib/game/animations/',
+  rootDirectory: '../../../lib/game/animations/',
+  imagesDirectory: '../../../media/',
+  imageUrlPrefix: '/glorytoukraine/media/',
   adapter: './app/adapters/impact'
 };

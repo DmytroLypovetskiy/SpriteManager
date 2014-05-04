@@ -5,8 +5,6 @@ var fs = require('fs'),
 
 var FileManager = function (options) {
     this.options = _.extend({}, this.defaultOptions, options);
-
-
 };
 
 FileManager.prototype = {
@@ -28,10 +26,11 @@ FileManager.prototype = {
 
     /**
      * Returns list of files in the specified root directory
+     * @param [{String}] directory path
      * @returns {*}
      */
-    getFileList: function () {
-      return fs.readdirSync(this.options.rootDirectory);
+    getFileList: function (directory) {
+      return fs.readdirSync(directory || this.options.rootDirectory);
     },
 
     /**

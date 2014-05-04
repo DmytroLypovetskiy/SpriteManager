@@ -1,7 +1,8 @@
 <!-- container for notifications -->
 <toaster-container toaster-options="{'time-out': 5000, 'position-class': 'toast-bottom-right'}"></toaster-container>
 <!-- upload area -->
-<upload-area source="animationStructure.imageSource"  ng-hide="!!animationStructure.imageSource"></upload-area>
+<!--<upload-area ng-if="!!animationStructure.imageSource" source="animationStructure.imageSource" ></upload-area>-->
+<image-selector ng-if="!animationStructure.imageSource" source="animationStructure.imageSource" url="animationStructure.imageUrl"></image-selector>
 <!-- sprite editor -->
 <sprite-editor ng-if="!!animationStructure.imageSource" editor-options="editorOptions" structure="animationStructure"></sprite-editor>
 
@@ -37,7 +38,7 @@
 </nav>
 
 <!-- side control panel -->
-<div class="panel panel-primary control-panel" ng-class="{small: !editorOptions.displayAnimationPanel}" ng-show="!!animationStructure.imageSource">
+<div class="panel panel-primary control-panel" ng-class="{small: !editorOptions.displayAnimationPanel}" ng-if="!!animationStructure.imageSource">
     <div class="panel-heading"  ng-click="editorOptions.displayAnimationPanel = !editorOptions.displayAnimationPanel">
         <em class="glyphicon glyphicon-tasks" style="font-size: 20px;"></em><span style="margin-left: 15px">Animations</span>
     </div>
