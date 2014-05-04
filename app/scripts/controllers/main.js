@@ -119,6 +119,12 @@ angular.module('spriteApp')
       return resultStructure;
     },
 
+    $scope.reloadImage = function () {
+      if (confirm('Are you sure you want to reload image?')) {
+        $scope.animationStructure.imageSource = null;
+      }
+    };
+
     /**
      * Modifies the structure to the final view and triggers popup,
      * where user can copy the structure by Ctrl+C
